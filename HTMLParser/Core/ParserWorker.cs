@@ -2,6 +2,7 @@
 using HTMLParser.Core.HtmlHelper;
 using HTMLParser.Core.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -71,6 +72,7 @@ namespace HTMLParser.Core
 
         public event Action<object, T> OnNewData;
         public event Action<object> OnCompleted;
+        public event Action<object, int> OnPageCompleted;
 
         #endregion
 
@@ -95,15 +97,34 @@ namespace HTMLParser.Core
                     return;
                 }
 
+                // get page source
                 var source = await loader.GetSourceByPageId(i);
                 var document = await new HtmlParser().ParseDocumentAsync(source);
-                var result = parser.Parse(document);
 
-                OnNewData?.Invoke(this, result);
+                // get urls for this page
+                var result = parser.CollectUrls(document);
+
+                // parse each url
+                await ParseEachUrl(result);
+
+                OnPageCompleted?.Invoke(this, i);
             }
 
             OnCompleted?.Invoke(this);
             isActive = false;
+        }
+
+        private async Task ParseEachUrl(IEnumerable<string> urls)
+        {
+            foreach (var url in urls)
+            {
+                var source = await loader.GetSource(url);
+                var document = await new HtmlParser().ParseDocumentAsync(source);
+
+                var result = parser.Parse(document);
+
+                OnNewData?.Invoke(this, result);
+            }
         }
     }
 }
