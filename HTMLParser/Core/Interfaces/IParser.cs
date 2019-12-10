@@ -1,4 +1,5 @@
 ﻿using AngleSharp.Html.Dom;
+using System.Collections.Generic;
 
 namespace HTMLParser.Core.Interfaces
 {
@@ -10,5 +11,7 @@ namespace HTMLParser.Core.Interfaces
         /// <param name="document">Html document</param>
         /// <returns>Parse result</returns>
         T Parse(IHtmlDocument document);
+
+        IEnumerable<string> CollectUrls(IHtmlDocument document);
     }
 }

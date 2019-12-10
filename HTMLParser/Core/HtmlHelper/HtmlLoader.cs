@@ -34,5 +34,23 @@ namespace HTMLParser.Core.HtmlHelper
 
             return source;
         }
+
+        /// <summary>
+        /// Get HTML source as text from url
+        /// </summary>
+        /// <param name="id">Page id</param>
+        /// <returns>HTML text</returns>
+        public async Task<string> GetSource(string url)
+        {
+            var response = await client.GetAsync(url);
+            string source = null;
+
+            if (response != null && response.StatusCode == HttpStatusCode.OK)
+            {
+                source = await response.Content.ReadAsStringAsync();
+            }
+
+            return source;
+        }
     }
 }
