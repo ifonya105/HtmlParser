@@ -13,7 +13,7 @@ namespace HTMLParser.Core.HtmlHelper
         public HtmlLoader(IParserSettings settings)
         {
             client = new HttpClient();
-            url = $"{settings.BaseUrl}/{settings.Prefix}/";
+            url = $"{settings.BaseUrl}/{settings.Prefix}";
         }
 
         /// <summary>

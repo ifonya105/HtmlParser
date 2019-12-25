@@ -21,5 +21,9 @@
         /// End point to parse (for example: page number - https://site.com/ + page + 9)
         /// </summary>
         int EndPoint { get; set; }
+        /// <summary>
+        /// Number of used threads during parsing
+        /// </summary>
+        int ThreadCount { get; set; }
     }
 }

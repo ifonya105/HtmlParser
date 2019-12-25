@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using HTMLParser.Core.Interfaces;
+using System;
 
 namespace HTMLParser.Core.Models
 {
-    class HabraModel
+    class HabraModel : IParserModel
     {
         public string Title { get; set; }
         public string Content { get; set; }
