@@ -1,22 +1,22 @@
 ﻿using HTMLParser.Core.Interfaces;
 
-namespace HTMLParser.Core.Habra
+namespace HTMLParser.Core.VisualCron
 {
-    class HabraParserSettings : IParserSettings
+    class VisualCronParserSettings : IParserSettings
     {
-        public string BaseUrl { get; set; } = "https://habr.com/ru/";
-        public string Prefix { get; set; } = "page{CurrentId}";
+        public string BaseUrl { get; set; } = "https://www.visualcron.com/blog";
+        public string Prefix { get; set; } = "?page={CurrentId}";
         public int StartPoint { get; set; }
         public int EndPoint { get; set; }
         public int ThreadCount { get; set; } = 1;
 
-        public HabraParserSettings(int startPoint, int endPoint)
+        public VisualCronParserSettings(int startPoint, int endPoint)
         {
             StartPoint = startPoint;
             EndPoint = endPoint;
         }
 
-        public HabraParserSettings(int startPoint, int endPoint, int threadCount)
+        public VisualCronParserSettings(int startPoint, int endPoint, int threadCount)
         {
             StartPoint = startPoint;
             EndPoint = endPoint;
